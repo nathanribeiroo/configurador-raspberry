@@ -1,9 +1,20 @@
 <?php
 
-//$read = parse_ini_file("config.conf");
+$read = parse_ini_file("config.conf");
 
-//function
-//if(!empty($read['id_loja']))
+function idExist() {
+    global $read;
+
+    if(isset($read['id_loja'])) {
+
+        if(!empty($read['id_loja']))
+            return true;
+
+        return false;
+    }
+    
+    return false;
+}
 
 ?>
 <!DOCTYPE html>
@@ -53,6 +64,14 @@
         <h1>Configuração da Loja</h1>
     </div>
     <div class="bs-example">
+
+        <?php if(idExist()){ ?>
+            <div class="col-lg-12 text-center">
+                <div class="alert alert-warning" role="alert">
+                    Loja cadastrada!
+                </div>
+            </div>
+        <?php } else { ?>
         <form method="post" class="form-horizontal" action="insert.php">
             <div class="form-group">
                 <div class="col-md-12">
@@ -78,11 +97,6 @@
                     </select>
                 </div>
             </div>
-<!--            <div class="form-group">-->
-<!--                <div class="col-md-12">-->
-<!--                    <input type="text" class="form-control" id="inputAlarmeExcecao" name="alarmeExcecao" placeholder="Alarme Exceção" data-role="tagsinput">-->
-<!--                </div>-->
-<!--            </div>-->
             <div class="form-group">
                 <div class="col-md-12">
                     <input type="text" class="form-control" id="inputHorarioEntrada" name="horarioEntrada" placeholder="Horário de Entrada">
@@ -133,11 +147,14 @@
                     <input type="text" class="form-control" id="inputUf" name="uf" placeholder="UF">
                 </div>
             </div>
-<!--            <div class="col-md-12">-->
-                <button type="submit" class="btn btn-primary btn-send">Salvar</button>
-<!--            </div>-->
+            <div class="form-group">
+                <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary btn-send btn-block">Salvar</button>
+                </div>
+           </div>
             </div>
         </form>
+        <?php } ?>
     </div>
 </div>
 

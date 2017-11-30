@@ -99,7 +99,7 @@ function idExist() {
             </div>
             <div class="form-group">
                 <div class="col-md-12">
-                    <input type="text" class="form-control" id="inputHorarioEntrada" name="horarioEntrada" placeholder="Horário de Entrada">
+                    <input type="text" class="form-control" id="inputHorarioEntrada" name="horarioEntrada" placeholder="Horário de Entrada" require>
                 </div>
             </div>
             <div class="form-group">
@@ -175,7 +175,6 @@ function idExist() {
             grupo = $("#inputGrupo"),
             tel = $("#inputTel"),
             telResponsavel = $("#inputTelResponsavel"),
-            alarmeExcecao = $("#inputAlarmeExcecao"),
             horarioEntrada = $("#inputHorarioEntrada"),
             horarioSaida = $("#inputHorarioSaida"),
             cep = $("#inputCep"),
@@ -194,6 +193,18 @@ function idExist() {
             cidade.val("");
             uf.val("");
         };
+
+        var submit = function () {
+            console.log("entrou");
+            if(loja.val() == "" || apelido.val() == "" || grupo.val() == "" || tel.val() == "" || telResponsavel.val() == "" || horarioEntrada.val() == "" || 
+                horarioSaida.val() == "" || cep.val() == "" || endereco.val() == "" || numero.val() == "" || bairro.val() == "" || cidade.val() == "" || uf.val() == "") {
+                    $.notify({icon: 'glyphicon glyphicon-alert',message: "<b>Preencha todos os campos!</b>"},{type: "warning"});
+                return false;
+            }
+
+            return true;
+         
+        }
 
         cep.mask('00000-000');
         tel.mask('0000000000');
@@ -257,8 +268,10 @@ function idExist() {
         });
 
         btn.on("click", function(){
-            console.log(alarmeExcecao.val());
+
+            return submit();
         });
+
 
         $(window).keydown(function(event) {
             if (event.keyCode == 13) {

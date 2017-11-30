@@ -30,7 +30,6 @@ $banco->insert("stores", [
         "leader_tel" =>  ["'".$_POST['telefoneResponsavel']."'"],
         "opening" =>  ["'".$_POST['horarioEntrada']."'"],
         "ending" =>  ["'".$_POST['horarioSaida']."'"]
-//        "exception" =>  ["'".$_POST['alarmeExcecao']."'"]
     ]
 );
 
